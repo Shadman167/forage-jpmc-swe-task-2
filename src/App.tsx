@@ -32,10 +32,10 @@ class App extends Component<{}, IState> {
    */
   renderGraph() {
 
-  if (this.state.showGraph){
+      if (this.state.showGraph){
 
-    return (<Graph data={this.state.data}/>)
-  }
+        return (<Graph data={this.state.data}/>);
+      }
 
   }
 
@@ -44,29 +44,26 @@ class App extends Component<{}, IState> {
    */
   getDataFromServer() {
 
-  let x = 0;
-  const interval = setInterval(() => {
-    DataStreamer.getData((serverResponds: ServerRespond[]) => {
-      // Update the state by creating a new array of data that consists of
-      // Previous data in the state and the new data from server
-      this.setState({
+      let x = 0;
+      const interval = setInterval(() => {
+        DataStreamer.getData((serverResponds: ServerRespond[]) => {
+          // Update the state by creating a new array of data that consists of
+          // Previous data in the state and the new data from server
+          this.setState({
 
-        data: serverResponds,
-        showGraph: true,
+            data: serverResponds,
+            showGraph: true,
 
-      });
-      x++;
+          });
+        });
+        x++;
 
-      if (x > 1000){
+        if (x > 1000){
 
-        clearInterval(interval);
-      }
-    }, 1000);
-
-
+           clearInterval(interval);
+        }
+      }, 100);
   }
-
-
 
   /**
    * Render the App react component
